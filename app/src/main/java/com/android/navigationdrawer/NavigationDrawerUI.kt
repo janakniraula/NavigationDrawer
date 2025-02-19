@@ -88,7 +88,8 @@ fun NavigationDrawerUI() {
                                     drawerState.close()
                                 }
                             },
-                            modifier = Modifier.padding(vertical = 8.dp)
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            icon = { Icon(imageVector = item.icons, contentDescription = item.title) }
                         )
                     }
                 }
