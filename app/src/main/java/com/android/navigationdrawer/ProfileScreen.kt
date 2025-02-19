@@ -1,24 +1,36 @@
 package com.android.navigationdrawer
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
 fun ProfileScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    val state = rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.welcome)
+    )
+
+    val progress by animateLottieCompositionAsState(
+        composition = state.value,
+        isPlaying = true,
+        iterations = 1000,
+        speed = 1.0f
+    )
+
+    Box(
+        modifier = Modifier.wrapContentSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Profile Screen",
-            style = MaterialTheme.typography.headlineLarge
+        LottieAnimation(
+            composition = state.value,
+            progress = { progress }
         )
     }
 }
